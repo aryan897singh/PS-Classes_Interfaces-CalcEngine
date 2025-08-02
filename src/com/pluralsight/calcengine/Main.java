@@ -1,9 +1,22 @@
 package com.pluralsight.calcengine;
+import static com.pluralsight.calcengine.MathEquation.*; //Basically we imported ALL static methods
+//IF WE WANT ONLY SPECIFIC METHOD: import static package.class.staticMethodName; (Only staticMethodName can be used here then)
 
 public class Main {
     //Module 3 completed
     public static void main(String[] args) {
         performCalculations();
+        int no = getNumberOfCalcs(); //DON'T FORGET - CALLING STATIC METHODS: class.staticMethod();
+                                                  //Now since we imported all static methods of MathEquation class, we can
+                                                  //simply write the method name as done here
+        System.out.println(no);
+
+        double summ = getSumOfResults();
+        System.out.println(summ);
+
+        double avg = getAvgOfResults();
+        System.out.println(avg );
+
     }
 
     static void performCalculations() {
@@ -30,8 +43,11 @@ public class Main {
     //creates MathEquation object based on values provided
     private static MathEquation create(double leftVal, double rightVal, char opCode) {
         MathEquation equation = new MathEquation(opCode, leftVal, rightVal); //This new MathEquation() is calling upon a MathEquation constructor
+        MathEquation.setNumberOfCalcs();
         return equation;
+        //MathEquation.setNumberOfCalcs(); NOTE!!!! The return statement immediately exits method, hence this is unreachable
     }
+
 
 }
 

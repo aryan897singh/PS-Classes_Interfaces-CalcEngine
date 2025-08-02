@@ -30,7 +30,17 @@ public class MathEquation {
         return this.result;
     }
 
+    //Static fields set, only Static Methods can be used to access these fields
+    private static int numberOfCalcs;
+    private static double sumOfResults;
+    private static double avgOfResults;
 
+    public static int getNumberOfCalcs(){return numberOfCalcs;}
+    public static double getSumOfResults(){return sumOfResults;}
+    public static double getAvgOfResults(){return sumOfResults/numberOfCalcs;}
+
+    public static void setNumberOfCalcs(){numberOfCalcs += 1;}
+    public static void setSumOfResults(double sum){sumOfResults += sum;}
 
     public MathEquation(char opCode){
         this.opCode = opCode;
@@ -45,8 +55,7 @@ public class MathEquation {
         this.rightVal = rightVal;
     }
 
-
-    void execute(){
+    public void execute(){
         switch (opCode) {
             case 'a':
                 result = leftVal + rightVal;
@@ -65,6 +74,7 @@ public class MathEquation {
                 result = 0.0d;
                 break;
         }
+        setSumOfResults(result);
     }
 
 }
