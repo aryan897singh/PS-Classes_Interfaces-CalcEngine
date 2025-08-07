@@ -2,6 +2,9 @@ package com.pluralsight.calcengine;
 import static com.pluralsight.calcengine.MathEquation.*; //Basically we imported ALL static methods
 //IF WE WANT ONLY SPECIFIC METHOD: import static package.class.staticMethodName; (Only staticMethodName can be used here then)
 
+//LATEST LEARNING : VARIABLE PARAMETER LENGTH ex. public void addPassengers(Passenger... list)  - here list is a var array of
+//passengers, and note: Only the last parameter of a method can be variable length
+
 public class Main {
     //Module 3 completed
     public static void main(String[] args) {
@@ -12,10 +15,10 @@ public class Main {
         System.out.println(no);
 
         double summ = getSumOfResults();
-        System.out.println(summ);
+        System.out.println("sum = " + summ);
 
         double avg = getAvgOfResults();
-        System.out.println(avg );
+        System.out.println("Average = "+ avg );
 
     }
 
@@ -37,6 +40,23 @@ public class Main {
             equation.execute();
             System.out.println("Result = " + equation.getResult());
         }
+
+        //So now we created a new object and passed in the opCode, so it called the rqrd constructor which set opcode field
+        //Then we called execute method on the object where we passed 2 values, which set left val and right val fields and calculated
+        MathEquation equationOverLoad = new MathEquation('d');
+            double leftDouble = 9;
+            double rightDouble = 4;
+            equationOverLoad.execute(leftDouble, rightDouble);
+        System.out.println("Overloaded result with doubles = " + equationOverLoad.getResult());
+
+        MathEquation integerDivisionEquation = new MathEquation('d');
+        int leftVal = 9;
+        int rightVal = 4;
+        integerDivisionEquation.execute(leftVal, rightVal);
+        System.out.println("Overloaded result with integers = " + integerDivisionEquation.getResult());
+
+
+
 
     }
 

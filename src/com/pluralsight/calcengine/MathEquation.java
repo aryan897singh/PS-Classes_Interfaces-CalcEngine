@@ -14,6 +14,7 @@ public class MathEquation {
     private char opCode;
     private double result;
 
+
     void setLeftVal(double leftVal){
         this.leftVal = leftVal;
     }
@@ -25,6 +26,8 @@ public class MathEquation {
     void setOpCode(char opCode){
         this.opCode = opCode;
     }
+
+
 
     double getResult(){
         return this.result;
@@ -75,6 +78,30 @@ public class MathEquation {
                 break;
         }
         setSumOfResults(result);
+    }
+
+    //OVERLOADING:
+    //NOW EXECUTE CAN BE CALLED, AND WHEN TWO VALUES ARE PUT IN, THE LEFT AND RIGHT VALS GET REWRITTEN, AND PREFORMS
+    //AN OPERATION WITH A FIXED OPCODE
+    public void execute(double leftVal, double rightVal){
+        this.leftVal = leftVal;
+        this.rightVal = rightVal;
+        execute();
+
+    }
+
+    //NOW HERE, I OVERLOADED WITH THE ABILITY TO MODIFY ALL THREE VALUES IF NEEDED, WOAHHHHHHHHH !!!!
+    public void execute(char opCode, double leftVal, double rightVal){
+        this.opCode = opCode;
+        this.execute(leftVal, rightVal);
+    }
+
+    public void execute(int leftVal, int rightVal){
+        this.leftVal = leftVal;
+        this.rightVal = rightVal;
+        execute();
+        this.result = (int) result; //Basically converts the result into an int
+
     }
 
 }
