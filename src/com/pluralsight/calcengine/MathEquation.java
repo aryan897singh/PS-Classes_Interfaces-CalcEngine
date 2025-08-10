@@ -1,6 +1,6 @@
 package com.pluralsight.calcengine;
 
-public class MathEquation {
+public class MathEquation  {
     /*
     //These are called fields of a class - define the state of a class. NOTE - we don't have psvm() yet here
     //We can make these fields private by using private keyword before data type (encapsulation!)
@@ -26,8 +26,6 @@ public class MathEquation {
     void setOpCode(char opCode){
         this.opCode = opCode;
     }
-
-
 
     double getResult(){
         return this.result;

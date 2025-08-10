@@ -3,12 +3,13 @@ import static com.pluralsight.calcengine.MathEquation.*; //Basically we imported
 //IF WE WANT ONLY SPECIFIC METHOD: import static package.class.staticMethodName; (Only staticMethodName can be used here then)
 
 //LATEST LEARNING : VARIABLE PARAMETER LENGTH ex. public void addPassengers(Passenger... list)  - here list is a var array of
-//passengers, and note: Only the last parameter of a method can be variable length
+//reference type Passengers, and note: Only the last parameter of a method can be variable length
 
 public class Main {
-    //Module 3 completed
+    //NEW LEARNING - MAIN METHOD IS A STATIC METHOD AND CAN ONLY CALL OTHER MAIN METHODS
     public static void main(String[] args) {
-        performCalculations();
+        preformMoreCalculations();
+
         int no = getNumberOfCalcs(); //DON'T FORGET - CALLING STATIC METHODS: class.staticMethod();
                                                   //Now since we imported all static methods of MathEquation class, we can
                                                   //simply write the method name as done here
@@ -20,9 +21,15 @@ public class Main {
         double avg = getAvgOfResults();
         System.out.println("Average = "+ avg );
 
+        Divider divider = new Divider();
+        doCalculation(divider, 100, 5);
+
+        Adder adder = new Adder();
+        doCalculation(adder, 5, 10);
+
     }
 
-    static void performCalculations() {
+    /*static void performCalculations() {
         double[] leftVals = {100.0d, 25.0d, 225.0d, 11.0d};
         double[] rightVals = {50.0d, 92.0d, 17.0d, 3.0d};
         char[] opCodes = {'d', 'a', 's', 'm'};
@@ -60,6 +67,22 @@ public class Main {
 
     }
 
+     */
+
+    static void preformMoreCalculations(){
+        CalculateBase[] calculations = {
+                new Divider(100.0, 5.0),
+                new Adder(25.0, 92.0),
+                new Subtractor(225.0, 17.0),
+                new Multiplier(11.0, 3.0)};
+
+        System.out.println("\n ARRAY CALCULATIONS");
+        for(int i = 0; i < calculations.length ; i++){
+            calculations[i].calculate();
+            System.out.println(calculations[i].getResult());
+        }
+    }
+
     //creates MathEquation object based on values provided
     private static MathEquation create(double leftVal, double rightVal, char opCode) {
         MathEquation equation = new MathEquation(opCode, leftVal, rightVal); //This new MathEquation() is calling upon a MathEquation constructor
@@ -67,6 +90,19 @@ public class Main {
         return equation;
         //MathEquation.setNumberOfCalcs(); NOTE!!!! The return statement immediately exits method, hence this is unreachable
     }
+
+    public static void doCalculation(CalculateBase calculation, double leftVal, double rightVal) {
+        calculation.setLeftVal(leftVal);
+        calculation.setRightVal(rightVal);
+        calculation.calculate();
+        System.out.println("Calculation result = " + calculation.getResult());
+    }
+
+
+
+
+
+
 
 
 }
