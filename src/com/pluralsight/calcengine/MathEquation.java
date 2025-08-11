@@ -50,6 +50,11 @@ public class MathEquation  {
 
     public MathEquation(){}
 
+    public MathEquation(double leftVal, double rightVal){
+        this.leftVal = leftVal;
+        this.rightVal = rightVal;
+    }
+
     public MathEquation(char opCode, double leftval, double rightVal) {
         this(opCode); //CHAINING OF CONSTRUCTORS, SINCE ONLY OPCODE IS ALREADY MADE - Object(no. of parameters)
         this.leftVal = leftval;

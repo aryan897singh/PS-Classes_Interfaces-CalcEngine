@@ -1,4 +1,6 @@
 package com.pluralsight.calcengine;
+import java.util.Scanner;
+
 import static com.pluralsight.calcengine.MathEquation.*; //Basically we imported ALL static methods
 //IF WE WANT ONLY SPECIFIC METHOD: import static package.class.staticMethodName; (Only staticMethodName can be used here then)
 
@@ -8,8 +10,8 @@ import static com.pluralsight.calcengine.MathEquation.*; //Basically we imported
 public class Main {
     //NEW LEARNING - MAIN METHOD IS A STATIC METHOD AND CAN ONLY CALL OTHER MAIN METHODS
     public static void main(String[] args) {
-        preformMoreCalculations();
-
+        /*preformMoreCalculations();         */
+/*
         int no = getNumberOfCalcs(); //DON'T FORGET - CALLING STATIC METHODS: class.staticMethod();
                                                   //Now since we imported all static methods of MathEquation class, we can
                                                   //simply write the method name as done here
@@ -26,6 +28,53 @@ public class Main {
 
         Adder adder = new Adder();
         doCalculation(adder, 5, 10);
+
+ */
+        //INTERACTIVE MODE:
+        CalculateBase object = executeInteractively();
+        object.calculate();
+        System.out.println("INTERACTIVE RESULT = " + object.getResult());
+
+    }
+
+    //This creates a new object based on the type of calculation we want to do, then in main method, just one method for all
+    public static CalculateBase calculateBase(MathOperation operation, double leftVal, double rightVal){
+        switch (operation){
+            case ADD:
+                return new Adder(leftVal, rightVal); //WHEN CREATING NEW OBJECT FROM SELF MADE CLASS ALWAYS USE 'NEW'!!!
+
+            case SUBTRACT:
+                return new Subtractor(leftVal, rightVal);
+
+            case MULTIPLY:
+                return new Multiplier(leftVal, rightVal);
+
+            case DIVIDE:
+                return new Divider(leftVal, rightVal);
+            default:
+                return null;
+        }
+
+    }
+
+    public static CalculateBase executeInteractively(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter an operation: \n1. Add (+) \n2. Subtract (-) \n3. Multiply (*) \n4. Divide (/))");
+        String op = input.nextLine();
+        System.out.println("Enter First number");
+        double num1 = input.nextInt();
+        System.out.println("Enter Second number ");
+        double num2 = input.nextInt();
+
+        MathOperation opCode = null;
+        if (op.charAt(0) == '+' || op.charAt(0) == 'a' || op.charAt(0) == '1'){ opCode = MathOperation.ADD;}
+        else if (op.charAt(0) == '-' || op.charAt(0) == 's' || op.charAt(0) == '2' ) {
+             opCode = MathOperation.SUBTRACT; }
+        else if (op.charAt(0) == '*' || op.charAt(0) == 'm' || op.charAt(0) == '3' || op.charAt(0) == 'p') {
+             opCode = MathOperation.MULTIPLY; }
+        else if (op.charAt(0) == '/' || op.charAt(0) == 'd' || op.charAt(0) == '4' || op.charAt(0) == 'q'){
+             opCode = MathOperation.DIVIDE; }
+        return calculateBase(opCode, num1, num2);
 
     }
 
